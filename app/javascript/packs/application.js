@@ -5,6 +5,8 @@
 
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
+require("@rails/actiontext")
+require("trix")
 require("channels")
 require("jquery")
 require("bootstrap")

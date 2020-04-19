@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   attr_accessor :current_password
+
+  has_many :blogs
 end

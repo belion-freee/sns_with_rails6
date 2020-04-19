@@ -26,12 +26,15 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">Sample SNS</a>
+      <a class="navbar-brand" href="/">Sample SNS</a>
       <div class="collapse navbar-collapse">
           <ul class="navbar-nav">
           <% if user_signed_in? %>
             <li class="nav-item">
                 <%= link_to("Plofile", edit_user_registration_path(current_user), class: "nav-link") %>
+            </li>
+            <li class="nav-item">
+                <%= link_to("Blogs", blogs_path, class: "nav-link") %>
             </li>
             <li class="nav-item">
                 <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-link") %>
