@@ -202,15 +202,9 @@ run_solargraph() {
 }
 
 rails_server() {
-    compose_stop $app
     rm_pids
-
-    renv=""
-    if [ -n "$RAILS_ENV" ]; then
-        renv="-e RAILS_ENV=$RAILS_ENV "
-    fi
-
-    $dc run $rm ${renv}--service-ports $app rails s -p 3000 -b 0.0.0.0
+    # $dc run $rm ${renv}--service-ports $app rails s -p 3000 -b 0.0.0.0
+    $dc run $rm --service-ports $app bundle exec foreman start -f Procfile.dev
 }
 
 rails_db() {

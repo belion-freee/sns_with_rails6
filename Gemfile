@@ -18,6 +18,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
 
+gem 'foreman'
+
 # @see https://github.com/rails/sprockets/issues/643
 gem 'sprockets', '~> 3.7.2'
 
