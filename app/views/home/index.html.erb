@@ -1,0 +1,12 @@
+<h1>Hello!</h1>
+<h2>This is SNS Created by Rails 6.0</h2>
+
+<% if user_signed_in? %>
+  <%= render 'blogs/index', blogs: @blogs %>
+<% else %>
+  <h3>Please sign up at first!</h3>
+  <h4><%= link_to("Sign up", new_user_registration_path) %></h4>
+
+  <h3>Or do you have account already?</h3>
+  <h4><%= link_to("Sign in", new_user_session_path) %></h4>
+<% end %>

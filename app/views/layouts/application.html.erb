@@ -5,11 +5,59 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
-    <%= yield %>
+    <% if notice %>
+      <div class="alert alert-info">
+        <%= notice %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    <% elsif alert %>
+      <div class="alert alert-danger">
+        <%= alert %>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
+    <% end %>
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="/">Sample SNS</a>
+      <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+                <%= link_to("Plofile", edit_user_registration_path(current_user), class: "nav-link") %>
+            </li>
+            <li class="nav-item">
+                <%= link_to("Blogs", blogs_path, class: "nav-link") %>
+            </li>
+            <li class="nav-item">
+                <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-link") %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+                <%= link_to("Sign up", new_user_registration_path, class: "nav-link") %>
+            </li>
+            <li class="nav-item">
+                <%= link_to("Sign in", new_user_session_path, class: "nav-link") %>
+            </li>
+          <% end %>
+          </ul>
+      </div>
+    </nav>
+
+    <div class="main-contents">
+      <%= yield %>
+    </div>
+
+    <div class="footer-copyright text-center py-3">
+      © 2020 Copyright:
+      <a href="https://github.com/belion-freee"> GitHub</a>
+    </div>
   </body>
 </html>

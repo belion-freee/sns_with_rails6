@@ -108,6 +108,19 @@ init_services() {
     $dc up $app
 }
 
+init_devise() {
+    echoing "install device"
+    bundle_cmd install
+    rails_cmd g devise:install
+
+    echoing "Create User"
+    rails_cmd g devise user
+    rails_cmd g devise:views users
+    rails_cmd g devise:controllers users
+    rails_cmd g migration add_name_to_users name:string
+    rails_cmd db:migrate
+}
+
 compose_up() {
     echoing "Create and start containers $*"
     rm_pids
@@ -189,15 +202,9 @@ run_solargraph() {
 }
 
 rails_server() {
-    compose_stop $app
     rm_pids
-
-    renv=""
-    if [ -n "$RAILS_ENV" ]; then
-        renv="-e RAILS_ENV=$RAILS_ENV "
-    fi
-
-    $dc run $rm ${renv}--service-ports $app rails s -p 3000 -b 0.0.0.0
+    # $dc run $rm ${renv}--service-ports $app rails s -p 3000 -b 0.0.0.0
+    $dc run $rm --service-ports $app bundle exec foreman start -f Procfile.dev
 }
 
 rails_db() {
@@ -338,6 +345,9 @@ case "$cmd" in
         ;;
     init)
         init_services $* && exit 0
+        ;;
+    init_devise)
+        init_devise $* && exit 0
         ;;
     ps)
         compose_ps && exit 0
