@@ -7,4 +7,5 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   has_many :blogs
+  has_many :comments
 end

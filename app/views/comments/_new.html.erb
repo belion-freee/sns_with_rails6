@@ -1,0 +1,13 @@
+<div id="comments">
+  <%= render partial: 'comments/index' %>
+</div>
+<div>
+  <h5>New Comment</h5>
+  <%= form_for :comment, url: blog_comments_path(@blog), remote: true do |f| %>
+    <%= f.text_area :body, id: "comments_body" %>
+
+    <div class="">
+      <%= f.submit :comment, class: "btn btn-sm btn-primary" %>
+    </div>
+  <% end %>
+</div>
