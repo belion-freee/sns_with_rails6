@@ -4,8 +4,10 @@
 <div>
   <p>
     <span><%= comment.user.name %></span> :
-    <%= comment.body %> |
-    <%= link_to "Delete", blog_comment_path(@blog, comment), class: 'btn btn-sm btn-outline-danger', method: :delete, remote: true %>
+    <%= comment.body %>
+    <% if comment.user == current_user %>
+      <%= link_to "Delete", blog_comment_path(@blog, comment), class: 'btn btn-sm btn-outline-danger', method: :delete, remote: true %>
+    <% end %>
   </p>
 </div>
 <% end %>
