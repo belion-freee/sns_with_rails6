@@ -1,0 +1,11 @@
+<h4>Comments</h4>
+
+<% @blog.comments.each do |comment| %>
+<div>
+  <p>
+    <span><%= comment.user.name %></span> :
+    <%= comment.body %> |
+    <%= link_to "Delete", blog_comment_path(@blog, comment), class: 'btn btn-sm btn-outline-danger', method: :delete, remote: true %>
+  </p>
+</div>
+<% end %>
