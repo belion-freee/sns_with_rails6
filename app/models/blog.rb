@@ -11,6 +11,12 @@ class Blog < ApplicationRecord
     includes(:favorites, comments: :user).find(id)
   }
 
+  scope :search, -> (search_param = nil) {
+    return if search_param.blank?
+    joins("INNER JOIN action_text_rich_texts ON action_text_rich_texts.record_id = blogs.id AND action_text_rich_texts.record_type = 'Blog'")
+    .where("action_text_rich_texts.body LIKE ? OR blogs.title LIKE ? ", "%#{search_param}%", "%#{search_param}%")
+  }
+
   def has_favorites?(favorite_user)
     self.favorites.to_a.find {|favorite| favorite.user_id == favorite_user.id }.present?
   end

@@ -1,5 +1,11 @@
 <h1>Blogs</h1>
 
+<%= form_tag blogs_path, method: :get do %>
+  <%= text_field_tag :q %>
+
+  <%= submit_tag "Search", class: "btn btn-outline-info btn-sm" %>
+<% end %>
+
 <% @blogs.each do |blog| %>
   <div class="my-3">
     <h2>
