@@ -2,11 +2,13 @@
 
 <% @blog.comments.each do |comment| %>
 <div>
-  <p>
-    <span><%= comment.user.name %></span> :
+  <strong>
     <%= comment.body %>
+  </strong>
+  <p>
+    by <%= comment.user.name %> at <%= comment.created_at.strftime("%Y/%m/%d") %>
     <% if comment.user == current_user %>
-      <%= link_to "Delete", blog_comment_path(@blog, comment), class: 'btn btn-sm btn-outline-danger', method: :delete, remote: true %>
+      <%= link_to "Delete", blog_comment_path(@blog, comment), method: :delete, remote: true %>
     <% end %>
   </p>
 </div>
