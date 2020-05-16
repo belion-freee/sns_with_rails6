@@ -1,16 +1,6 @@
+<%= render 'share/errors', model: blog %>
+
 <%= form_with(model: blog, local: true) do |form| %>
-  <% if blog.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
-
-      <ul>
-        <% blog.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -18,12 +8,10 @@
 
   <div class="field">
     <%= form.label :body %>
-    <div class="blog-body">
-      <%= form.rich_text_area :body %>
-    </div>
+    <%= form.rich_text_area :body %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions my-2">
+    <%= form.submit class: "btn btn-outline-primary my-2" %>
   </div>
 <% end %>

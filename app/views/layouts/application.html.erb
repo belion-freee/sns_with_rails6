@@ -10,54 +10,48 @@
   </head>
 
   <body>
-    <% if notice %>
-      <div class="alert alert-info">
-        <%= notice %>
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-      </div>
-    <% elsif alert %>
-      <div class="alert alert-danger">
-        <%= alert %>
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= alert_name(key) %> mb-0">
+        <%= message %>
         <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>
     <% end %>
-
     <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="/">Sample SNS</a>
-      <div class="collapse navbar-collapse">
-          <ul class="navbar-nav">
-          <% if user_signed_in? %>
-            <li class="nav-item">
-                <%= link_to("Plofile", edit_user_registration_path(current_user), class: "nav-link") %>
-            </li>
-            <li class="nav-item">
-                <%= link_to("Blogs", blogs_path, class: "nav-link") %>
-            </li>
-            <li class="nav-item">
-                <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-link") %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-                <%= link_to("Sign up", new_user_registration_path, class: "nav-link") %>
-            </li>
-            <li class="nav-item">
-                <%= link_to("Sign in", new_user_session_path, class: "nav-link") %>
-            </li>
-          <% end %>
-          </ul>
+      <div class="container">
+        <a class="navbar-brand" href="/">Sample SNS</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                  <%= link_to("Plofile", edit_user_registration_path(current_user), class: "nav-link") %>
+              </li>
+              <li class="nav-item">
+                  <%= link_to("Blogs", blogs_path, class: "nav-link") %>
+              </li>
+              <li class="nav-item">
+                  <%= link_to("Sign out", destroy_user_session_path, method: :delete, class: "nav-link") %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                  <%= link_to("Sign up", new_user_registration_path, class: "nav-link") %>
+              </li>
+              <li class="nav-item">
+                  <%= link_to("Sign in", new_user_session_path, class: "nav-link") %>
+              </li>
+            <% end %>
+            </ul>
+        </div>
       </div>
     </nav>
 
-    <div class="main-contents">
+    <div class="container text-center">
       <%= yield %>
     </div>
 
-    <div class="footer-copyright text-center py-3">
-      © 2020 Copyright:
-      <a href="https://github.com/belion-freee"> GitHub</a>
-    </div>
+    <footer class="page-footer font-small blue pt-4">
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://github.com/belion-freee"> GitHub</a>
+      </div>
+    </footer>
   </body>
 </html>
