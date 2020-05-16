@@ -62,6 +62,12 @@ class BlogsController < ApplicationController
     end
   end
 
+  def favorite
+    @blog = Blog.includes(:favorites).find(params[:blog_id])
+    @blog.has_favorites?(current_user) ? @blog.unlike(current_user.id) : @blog.like(current_user.id)
+    render :favorite
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
