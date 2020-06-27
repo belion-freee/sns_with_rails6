@@ -1,6 +1,6 @@
 $(window).on('load', () => {
   $("input[type=file]").change((e) => {
-    $('#image_prev').removeClass('hidden');
+    $('#image_prev').removeClass('d-none');
     $('#image_present').remove();
     const files = e.currentTarget.files;
     if (files && files[0]) {
