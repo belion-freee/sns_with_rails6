@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.includes(:user).search(params["q"])
+    @blogs = Blog.includes(:user).search(params["q"]).page(params[:page]).per(5)
   end
 
   # GET /blogs/1
@@ -80,6 +80,6 @@ class BlogsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def blog_params
-      params.require(:blog).permit(:title, :body, :image).merge({ user_id: current_user.id })
+      params.require(:blog).permit(:title, :body, :image, :image_cache).merge({ user_id: current_user.id })
     end
 end
