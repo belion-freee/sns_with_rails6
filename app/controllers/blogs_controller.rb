@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.search(params["q"])
+    @blogs = Blog.includes(:user).search(params["q"])
   end
 
   # GET /blogs/1

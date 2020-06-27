@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   attr_accessor :current_password
 
+  mount_uploader :image, ImageUploader
+
   has_many :blogs
   has_many :comments
   has_many :favorites
