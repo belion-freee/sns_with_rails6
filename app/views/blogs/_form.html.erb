@@ -7,6 +7,18 @@
   </div>
 
   <div class="field">
+    <%= form.label :image %><br />
+    <%= form.file_field :image %><br />
+    <% if blog.image? %>
+      <%= image_tag blog.image.thumb.url, id: 'image_present' %>
+    <% else %>
+      <%= image_pack_tag 'no_image.png', id: 'image_present' %>
+      <%= form.hidden_field :image_cache %>
+    <% end %>
+    <img class="hidden" id="image_prev" src="#" width="150" height="150">
+  </div>
+
+  <div class="field">
     <%= form.label :body %>
     <%= form.rich_text_area :body %>
   </div>

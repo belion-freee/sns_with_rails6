@@ -4,6 +4,10 @@ class Blog < ApplicationRecord
   has_many :favorites
   has_rich_text :body
 
+  mount_uploader :image, ImageUploader
+
+  THUMBNAIL_SIZE = [150, 150].freeze
+
   validates :title, presence: true
   validates :body, presence: true
 

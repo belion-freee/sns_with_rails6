@@ -8,12 +8,11 @@
 
 <% @blogs.each do |blog| %>
   <div class="my-3">
-    <h2>
-      <%= link_to blog.title, blog %>
-      <small class="pl-1">
-        by <em><%= blog.user.name %></em>
-      </small>
-    </h2>
+    <%= img_tag(blog) %>
+    <%= link_to blog.title, blog, class: 'h2' %>
+    <small class="pl-1">
+      by <em><%= blog.user.name %></em>
+    </small>
   </div>
 <% end %>
 
