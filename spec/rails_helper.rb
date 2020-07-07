@@ -36,6 +36,8 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   # main support module
   config.include SpecSupport
+  # for devise test
+  config.include Devise::Test::IntegrationHelpers, type: :request
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

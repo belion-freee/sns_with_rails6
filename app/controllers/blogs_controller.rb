@@ -30,7 +30,7 @@ class BlogsController < ApplicationController
     respond_to do |format|
       if @blog.save
         format.html { redirect_to @blog, notice: 'Blog was successfully created.' }
-        format.json { render :show, status: :created, location: @blog }
+        format.json { render json: @blog, status: :created }
       else
         format.html { render :new }
         format.json { render json: @blog.errors, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class BlogsController < ApplicationController
     respond_to do |format|
       if @blog.update(blog_params)
         format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }
-        format.json { render :show, status: :ok, location: @blog }
+        format.json { render json: @blog, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @blog.errors, status: :unprocessable_entity }
@@ -75,7 +75,7 @@ class BlogsController < ApplicationController
     end
 
     def check_role
-      raise "Not Allowed" unless @blog.user_id == current_user.id
+      redirect_to blogs_url unless @blog.user_id == current_user.id
     end
 
     # Only allow a list of trusted parameters through.
