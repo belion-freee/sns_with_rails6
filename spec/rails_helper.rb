@@ -90,4 +90,27 @@ RSpec.configure do |config|
     driven_by Capybara.javascript_driver
     host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
+
+  # export coverage
+  # if you wana see the coverage, please give env COVERAGE=true
+  # example: docker-compose run --rm -e COVERAGE=true web bundle exec rspec
+  if ENV["COVERAGE"]
+    require 'simplecov'
+
+    # failed if coverage is less than 90%
+    SimpleCov.minimum_coverage 90
+
+    # change output coverage dir
+    SimpleCov.coverage_dir('tmp/cov')
+
+    SimpleCov.start do
+      # exclude spec dir
+      add_filter '/spec/'
+
+      # group folders
+      # you can't get coverage for view. @see https://github.com/colszowka/simplecov/issues/38
+      add_group 'Models', 'app/models'
+      add_group 'Controllers', 'app/controllers'
+    end
+  end
 end
