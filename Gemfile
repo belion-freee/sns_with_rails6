@@ -52,7 +52,11 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  # @see https://github.com/titusfortner/webdrivers/issues/148#issuecomment-538507857
+  gem 'webdrivers', require: !ENV['SELENIUM_REMOTE_URL']
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
