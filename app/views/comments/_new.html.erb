@@ -6,7 +6,7 @@
   <%= form_for :comment, url: blog_comments_path(@blog), remote: true do |f| %>
     <%= f.text_area :body, id: "comments_body" %>
 
-    <div class="">
+    <div>
       <%= f.submit :comment, class: "btn btn-sm btn-primary" %>
     </div>
   <% end %>
