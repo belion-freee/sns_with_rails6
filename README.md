@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/belion-freee/sns_with_rails6.svg?style=svg)](https://circleci.com/gh/belion-freee/sns_with_rails6)
+
 # SNS App with Rails 6.0
 This is sample application for beginners.
 
