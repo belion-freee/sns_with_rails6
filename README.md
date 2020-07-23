@@ -6,6 +6,8 @@ Ruby on Rails学習者とメンターさん向けのサンプルアプリケー�
 ## Demo
 サンプルアプリケーションの動作はこのようになります。
 
+<img src="https://user-images.githubusercontent.com/34331230/88256022-0750a180-ccf5-11ea-8849-11a040b4d51f.gif" width="600px">
+
 ## 用途
 Rails初学者向けに以下の要件を満たす目的で作成されたサンプルアプリケーション。
 
