@@ -58,6 +58,14 @@ Dockerを使用しているので、ローカルにpullして開発環境を立�
   - Rspecで、単体テストと統合テストを実装しています。
 - [CircleCIによる自動テスト](https://github.com/belion-freee/sns_with_rails6/pull/12)
   - 自動テストの設定とREADMEへのバッジ追加を実装してます。
+  
+#### 参考になりそうなプルリクエスト
+以下は見なくてもいいけど参考になりそうなプルリクエストです。
+
+- [初期データ投入](https://github.com/belion-freee/sns_with_rails6/pull/4)
+  - seedsファイルを使って初期データの投入をしています。
+- [デザインの修正](https://github.com/belion-freee/sns_with_rails6/pull/5)
+  - Bootstrap4の機能をなるべく使うようにしてます。css書かなくてもわりと調整できます。
 
 ### ローカルで動かす
 GitHubからpullしてきたらプロジェクトフォルダに移動して、`./qs init --webpack`してください。`http:localhost:3000`にアクセスするとアプリが利用可能です。
