@@ -53,9 +53,9 @@ Dockerを使用しているので、ローカルにpullして開発環境を立�
 - [画像アップロード機能](https://github.com/belion-freee/sns_with_rails6/pull/9)
   - carrierwaveを使って画像アップロード機能を実装してます。
 - [ページネーション](https://github.com/belion-freee/sns_with_rails6/pull/10)
-  - kaminariを使って画像アップロード機能を実装してます。
+  - kaminariを使ってページネーション機能を実装してます。
 - [Rspecを使ったテスト](https://github.com/belion-freee/sns_with_rails6/pull/11)
-  - Rspecで、単体テストと統合テストを実装しています。
+  - Rspecを使って単体テストと統合テストを実装しています。
 - [CircleCIによる自動テスト](https://github.com/belion-freee/sns_with_rails6/pull/12)
   - 自動テストの設定とREADMEへのバッジ追加を実装してます。
   
