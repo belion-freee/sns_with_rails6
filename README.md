@@ -68,19 +68,27 @@ Dockerを使用しているので、ローカルにpullして開発環境を立�
   - Bootstrap4の機能をなるべく使うようにしてます。css書かなくてもわりと調整できます。
 
 ### ローカルで動かす
-GitHubからpullしてきたらプロジェクトフォルダに移動して、`./qs init --webpack`してください。`http:localhost:3000`にアクセスするとアプリが利用可能です。
+GitHubからpullしてきたらプロジェクトフォルダに移動して、`./qs init --webpack`してください。
 
-以降の開発では `./qs server` でアプリを起動すると、webpack-dev-serverによるホットリロードがさせるようになるので、オススメです。
+```
+$ git clone https://github.com/belion-freee/sns_with_rails6.git <Project name>
+$ cd <Project name>
+$ ./qs init --webpack
+```
+
+`http://localhost:3000`にアクセスするとアプリが利用可能です。
+
+以降の開発では `./qs server` でアプリを起動すると、webpack-dev-serverによるホットリロードが実行されるので、オススメです。
+
 
 seedで初期アカウントを登録してるので、すぐに動作確認できます。
 ```
-以下二つのアカウントが利用可能です。
-ユーザーhoge
+# You can use those accounts
+
 name: "hoge"
 email: "hoge@sample.com"
 password: "Password"
 
-ユーザーfoo
 name: "foo"
 email: "foo@sample.com"
 password: "Password"
