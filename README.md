@@ -78,7 +78,7 @@ $ ./qs init --webpack
 
 `http://localhost:3000`にアクセスするとアプリが利用可能です。
 
-以降の開発では `./qs server` でアプリを起動すると、webpack-dev-serverによるホットリロードが実行されるので、オススメです。
+以降の開発では `./qs server` でアプリを起動すると、webpack-dev-serverによるホットリロードが実行されたり、[byebug](https://github.com/deivid-rodriguez/byebug)が利用できるので、開発効率が上がりオススメです。
 
 
 seedで初期アカウントを登録してるので、すぐに動作確認できます。
