@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
+
+  resources :users, only: %w[index show] do
+    post :follow
+  end
 end
