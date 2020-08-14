@@ -1,3 +1,17 @@
+import $ from 'jquery'
+import 'select2'
+
+// DOMが構築されたら実行される。$(function(){〜});と同じ。
+// DOMの構成を変える場合はこちら
+$(document).ready(() => {
+  $('.enable-select2').select2({
+    dropdownAutoWidth: true,
+    width: '40%'
+  })
+});
+
+// 使用される画像やスタイルなどを含め、ページが完全に読み込まれたら実行される
+// ブラウザに表示されている画像を操作したい場合などはこちら
 $(window).on('load', () => {
   $("input[type=file]").change((e) => {
     $('#image_prev').removeClass('d-none');

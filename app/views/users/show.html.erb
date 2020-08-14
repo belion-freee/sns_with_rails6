@@ -10,6 +10,18 @@
   <strong>Email</strong> : <%= @user.email %>
 </h5>
 
+<% if @user.id == current_user.id %>
+  <div class="my-4">
+    <h5>Favarit Books for tag</h5>
+
+    <% favorites_group_by_tag(current_user.favorite_blogs).each do |tag, ids| %>
+      <%= link_to blogs_path(ids: ids) do %>
+        <span class="badge badge-primary my-2 mr-1 p-2"><%= tag %></span>  <%= ids.size %>
+      <% end %><br />
+    <% end %>
+  </div>
+<% end %>
+
 <div class="my-2">
   <% if @user.id == current_user.id %>
     <%= link_to 'Edit', edit_user_registration_path(current_user), class: "btn btn-outline-success btn-sm" %>

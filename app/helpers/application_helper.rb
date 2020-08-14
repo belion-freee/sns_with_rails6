@@ -27,4 +27,11 @@ module ApplicationHelper
     label, key = current_user.following?(user) ? ["Unfollow", "secondary"] : ["Follow", "primary"]
     link_to(label, user_follow_path(@user), method: :post, remote: true, class: "btn btn-#{key} btn-sm")
   end
+
+  def favorites_group_by_tag(blogs)
+    blogs.map(&:tag_list).flatten.uniq.map {|tag|
+      ids = blogs.tagged_with(tag).ids
+      [tag, ids]
+    }.sort_by {|r| r.last.size }.reverse
+  end
 end
