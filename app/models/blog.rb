@@ -6,6 +6,19 @@ class Blog < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  acts_as_taggable_on :tags
+
+  TAGS = [
+    "entertainment",
+    "travel",
+    "fashion",
+    "food",
+    "lifestyle",
+    "sports",
+    "business",
+    "technology"
+  ].freeze
+
   THUMBNAIL_SIZE = [150, 150].freeze
 
   validates :title, presence: true

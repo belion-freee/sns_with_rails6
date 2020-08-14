@@ -2,8 +2,13 @@
 
 <%= form_with(model: blog, local: true) do |form| %>
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title %><br />
     <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tag_list %><br />
+    <%= form.select :tag_list, options_for_select(Blog::TAGS, blog.tag_list), {}, multiple: true, class: "enable-select2" %>
   </div>
 
   <div class="field">
