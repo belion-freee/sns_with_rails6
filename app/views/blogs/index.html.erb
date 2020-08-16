@@ -1,7 +1,12 @@
 <h1>Blogs</h1>
 
 <%= form_tag blogs_path, method: :get do %>
-  <%= text_field_tag :q %>
+  <div class="my-2">
+    <%= select_tag :tag_list, options_for_select(Blog::TAGS), multiple: true, class: "enable-select2" %>
+  </div>
+  <div class="my-2">
+    <%= text_field_tag :q, "", placeholder: "キーワード" %>
+  </div>
 
   <%= submit_tag "Search", class: "btn btn-outline-info btn-sm" %>
 <% end %>
@@ -15,6 +20,11 @@
     <small class="pl-1">
       by <em><%= blog.user.name %></em>
     </small>
+    <p class="mt-2">
+      <% blog.tag_list.each do |tag| %>
+        <span class="badge badge-primary mr-1 p-2"><%= tag %></span>
+      <% end %>
+    </p>
   </div>
 <% end %>
 

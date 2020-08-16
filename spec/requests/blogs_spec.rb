@@ -29,6 +29,29 @@ RSpec.describe "Blogs", type: :request do
         expect(response.body).to include("Title2#{timestamp}")
       end
     end
+
+    context "when include ids params" do
+      it 'render to index page specified ids' do
+        blog = Blog.find_by(title: "Title2#{timestamp}")
+        get blogs_path(ids: blog.id)
+        expect(response.status).to eq(200)
+        expect(response.body).not_to include("Title1#{timestamp}")
+        expect(response.body).to include("Title2#{timestamp}")
+      end
+    end
+
+    context "when include tag_list" do
+      before {
+        create(:blog, title: "Title with tag#{timestamp}", tag_list: "travel")
+      }
+      it 'render to index page specified tags' do
+        get blogs_path(tag_list: ["travel"])
+        expect(response.status).to eq(200)
+        expect(response.body).not_to include("Title1#{timestamp}")
+        expect(response.body).not_to include("Title2#{timestamp}")
+        expect(response.body).to include("Title with tag#{timestamp}")
+      end
+    end
   end
 
   describe "GET /blogs/:id" do
@@ -81,20 +104,27 @@ RSpec.describe "Blogs", type: :request do
     context 'valid params' do
       it "redirect to show page" do
         expect {
-          post blogs_path, params: { blog: attributes_for(:blog, user: current_user, title: "Create Blog#{timestamp}") }
+          post blogs_path, params: {
+            blog: attributes_for(
+              :blog,
+              title: "Create Blog#{timestamp}",
+              tag_list: ["entertainment", "fashion"]
+            )
+          }
         }.to change { Blog.count }.by(1)
         blog = Blog.find_by(title: "Create Blog#{timestamp}")
         expect(response).to redirect_to(blog_path(blog))
         follow_redirect!
         expect(response.body).to include("Blog was successfully created.")
         expect(response.body).to include("Create Blog#{timestamp}")
+        expect(response.body).to include("entertainment", "fashion")
       end
     end
 
     context 'invalid params' do
       it "render to new page" do
         expect {
-          post blogs_path, params: { blog: attributes_for(:blog, user: current_user, title: "") }
+          post blogs_path, params: { blog: attributes_for(:blog, title: "") }
         }.to change { Blog.count }.by(0)
         expect(response.status).to eq(200)
         expect(response.body).to include(CGI.escapeHTML("Title can't be blank"))
@@ -105,18 +135,25 @@ RSpec.describe "Blogs", type: :request do
       context 'valid params' do
         it "return updated attributes" do
           expect {
-            post blogs_path(format: :json), params: { blog: attributes_for(:blog, user: current_user, title: "Create Blog#{timestamp}") }
+            post blogs_path(format: :json), params: {
+              blog: attributes_for(
+                :blog,
+                title: "Create Blog#{timestamp}",
+                tag_list: ["entertainment", "fashion"]
+              )
+            }
           }.to change { Blog.count }.by(1)
           expect(response.status).to eq(201)
           expect(json_response["title"]).to eq("Create Blog#{timestamp}")
           expect(json_response["user_id"]).to eq(current_user.id)
+          expect(json_response["tag_list"]).to include("entertainment", "fashion")
         end
       end
 
       context 'invalid params' do
         it "return error messages" do
           expect {
-            post blogs_path(format: :json), params: { blog: attributes_for(:blog, user: current_user, title: "") }
+            post blogs_path(format: :json), params: { blog: attributes_for(:blog, title: "") }
           }.to change { Blog.count }.by(0)
           expect(response.status).to eq(422)
           expect(json_response["title"]).to include("can't be blank")
@@ -126,20 +163,21 @@ RSpec.describe "Blogs", type: :request do
   end
 
   describe "PUT /blogs/:id" do
-    let(:blog) { create(:blog, user: current_user) }
+    let(:blog) { create(:blog, user: current_user, tag_list: ["entertainment"]) }
     context 'valid params' do
       it "redirect to show page" do
-        put blog_path(blog), params: { blog: { user_id: current_user.id, title: "Updated #{timestamp}"} }
+        put blog_path(blog), params: { blog: { title: "Updated #{timestamp}", tag_list: ["technology"]} }
         expect(response).to redirect_to(blog_path(blog))
         follow_redirect!
         expect(response.body).to include("Blog was successfully updated.")
         expect(response.body).to include("Updated #{timestamp}")
+        expect(response.body).to include("technology")
       end
     end
 
     context 'invalid params' do
       it "render to edit page" do
-        put blog_path(blog), params: { blog: { user_id: current_user.id, title: ""} }
+        put blog_path(blog), params: { blog: { title: ""} }
         expect(response.status).to eq(200)
         expect(response.body).to include(CGI.escapeHTML("Title can't be blank"))
       end
@@ -148,7 +186,7 @@ RSpec.describe "Blogs", type: :request do
     context 'try to update other users blog' do
       it "redirect to index page" do
         other_blog = create(:blog)
-        put blog_path(other_blog), params: { blog: { user_id: current_user.id, title: "Title"} }
+        put blog_path(other_blog), params: { blog: { title: "Title"} }
         expect(response).to redirect_to(blogs_path)
       end
     end
@@ -156,16 +194,17 @@ RSpec.describe "Blogs", type: :request do
     context "request format is json" do
       context 'valid params' do
         it "return updated attributes" do
-          put blog_path(blog, format: :json), params: { blog: { user_id: current_user.id, title: "Updated #{timestamp}"} }
+          put blog_path(blog, format: :json), params: { blog: { title: "Updated #{timestamp}", tag_list: ["technology"]} }
           expect(response.status).to eq(200)
           expect(json_response["title"]).to eq("Updated #{timestamp}")
           expect(json_response["user_id"]).to eq(current_user.id)
+          expect(json_response["tag_list"]).to include("technology")
         end
       end
 
       context 'invalid params' do
         it "return error messages" do
-          put blog_path(blog, format: :json), params: { blog: { user_id: current_user.id, title: ""} }
+          put blog_path(blog, format: :json), params: { blog: { title: ""} }
           expect(response.status).to eq(422)
           expect(json_response["title"]).to include("can't be blank")
         end
