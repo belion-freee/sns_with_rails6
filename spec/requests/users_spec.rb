@@ -19,6 +19,16 @@ RSpec.describe "Users", type: :request do
       expect(response.body).to include("User1#{timestamp}")
       expect(response.body).to include("User2#{timestamp}")
     end
+
+    context "when search" do
+      it 'render to index page specify name' do
+        get users_path(q: { name_cont: timestamp})
+        expect(response.status).to eq(200)
+        expect(response.body).not_to include(current_user.name)
+        expect(response.body).to include("User1#{timestamp}")
+        expect(response.body).to include("User2#{timestamp}")
+      end
+    end
   end
 
   describe "GET /users/:id" do

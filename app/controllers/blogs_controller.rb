@@ -5,9 +5,11 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    blogs = Blog.includes(:user).search(params["q"])
+    @q = Blog.ransack(params[:q])
+    blogs = @q.result.includes(:user)
     blogs = blogs.where(id: params[:ids]) if params[:ids].present?
     blogs = blogs.tagged_with(params[:tag_list], any: true) if params[:tag_list].present?
+    blogs = blogs.search_body(params[:body]) if params[:body].present?
     @blogs = blogs.page(params[:page]).per(5)
   end
 

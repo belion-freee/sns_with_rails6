@@ -31,6 +31,8 @@ gem 'image_processing'
 gem 'carrierwave'
 gem 'mini_magick'
 
+gem 'ransack'
+
 gem 'kaminari'
 
 gem 'acts-as-taggable-on', '~> 6.0'

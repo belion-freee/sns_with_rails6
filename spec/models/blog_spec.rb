@@ -14,7 +14,7 @@ RSpec.describe Blog, type: :model do
 
   context "search" do
     let(:search_param) { nil }
-    subject { Blog.search(search_param) }
+    subject { Blog.search_body(search_param) }
 
     context 'without search_param' do
       it "all blogs" do
@@ -26,7 +26,7 @@ RSpec.describe Blog, type: :model do
       let(:search_param) { @timestamp }
       before {
         timestamp!
-        create(:blog, title: "Title#{@timestamp}")
+        create(:blog, body: "<h1>Title#{@timestamp}</h1>")
       }
       it '1 record' do
         expect(subject.size).to eq(1)

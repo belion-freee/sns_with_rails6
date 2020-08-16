@@ -1,11 +1,14 @@
 <h1>Blogs</h1>
 
-<%= form_tag blogs_path, method: :get do %>
+<%= search_form_for @q do |f| %>
   <div class="my-2">
     <%= select_tag :tag_list, options_for_select(Blog::TAGS), multiple: true, class: "enable-select2" %>
   </div>
   <div class="my-2">
-    <%= text_field_tag :q, "", placeholder: "キーワード" %>
+    <%= f.search_field :title_cont, placeholder: "Search by title", class: "py-1" %>
+  </div>
+  <div class="my-2">
+    <%= text_field_tag :body, "", placeholder: "Search by  body", class: "py-1" %>
   </div>
 
   <%= submit_tag "Search", class: "btn btn-outline-info btn-sm" %>
