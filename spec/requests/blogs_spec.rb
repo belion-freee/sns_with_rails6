@@ -52,6 +52,19 @@ RSpec.describe "Blogs", type: :request do
         expect(response.body).to include("Title with tag#{timestamp}")
       end
     end
+
+    context "when include title" do
+      before {
+        create(:blog, title: "Title3#{timestamp}")
+      }
+      it 'render to index page specified tags' do
+        get blogs_path(q: { title_cont: "Title3#{timestamp}" })
+        expect(response.status).to eq(200)
+        expect(response.body).not_to include("Title1#{timestamp}")
+        expect(response.body).not_to include("Title2#{timestamp}")
+        expect(response.body).to include("Title3#{timestamp}")
+      end
+    end
   end
 
   describe "GET /blogs/:id" do
