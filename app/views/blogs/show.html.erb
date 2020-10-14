@@ -10,7 +10,7 @@
 
 <p>
   <% @blog.tag_list.each do |tag| %>
-    <span class="badge badge-primary mr-1 p-2"><%= tag %></span>
+    <span class="badge badge-primary mr-1 p-2"><%= tags(tag) %></span>
   <% end %>
 </p>
 
@@ -18,8 +18,8 @@
 
   <div class="my-2">
     <% if @blog.user_id == current_user.id %>
-      <%= link_to 'Edit', edit_blog_path(@blog), class: "btn btn-outline-success btn-sm" %> |
-      <%= link_to 'Destroy', @blog, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %> |
+      <%= link_to tl(:edit), edit_blog_path(@blog), class: "btn btn-outline-success btn-sm" %> |
+      <%= link_to tl(:delete), @blog, method: :delete, data: { confirm: t("users.registrations.edit.are_you_sure") }, class: "btn btn-outline-danger btn-sm" %> |
     <% end %>
     <%= render partial: 'favorite' %>
   </div>

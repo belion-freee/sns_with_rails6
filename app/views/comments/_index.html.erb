@@ -1,4 +1,4 @@
-<h4>Comments</h4>
+<h4><%= t(".title") %></h4>
 
 <% @blog.comments.each do |comment| %>
 <div>
@@ -7,7 +7,7 @@
   <strong><%= comment.user.name %></strong>
   <small><%= comment.created_at.strftime("%Y/%m/%d") %></small>
   <% if comment.user == current_user %>
-    <%= link_to "Delete", blog_comment_path(@blog, comment), method: :delete, remote: true %>
+    <%= link_to tl(:delete), blog_comment_path(@blog, comment), method: :delete, remote: true %>
   <% end %>
 
   <p><%= comment.body %></p>

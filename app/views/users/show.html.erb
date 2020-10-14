@@ -3,16 +3,16 @@
 </h2>
 
 <h5>
-  <strong>Name</strong> : <%= @user.name %>
+  <strong><%= tl(:name) %></strong> : <%= @user.name %>
 </h5>
 
 <h5>
-  <strong>Email</strong> : <%= @user.email %>
+  <strong><%= tl(:email) %></strong> : <%= @user.email %>
 </h5>
 
 <% if @user.id == current_user.id %>
   <div class="my-4">
-    <h5>Favarit Books for tag</h5>
+    <h5><%= t(".favorites") %></h5>
 
     <% favorites_group_by_tag(current_user.favorite_blogs).each do |tag, ids| %>
       <%= link_to blogs_path(ids: ids) do %>
@@ -24,7 +24,7 @@
 
 <div class="my-2">
   <% if @user.id == current_user.id %>
-    <%= link_to 'Edit', edit_user_registration_path(current_user), class: "btn btn-outline-success btn-sm" %>
+    <%= link_to tl(:edit), edit_user_registration_path(current_user), class: "btn btn-outline-success btn-sm" %>
   <% else %>
     <%= render partial: 'follow' %>
   <% end %>

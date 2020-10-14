@@ -52,7 +52,7 @@ RSpec.describe "Blogs", type: :system do
     context "when own comment" do
       it 'post and deletable' do
         first("#comments_body").set("Comment#{timestamp}")
-        first('input[value="comment"]').click
+        first('#post_comment').click
         wait_until {
           all("#comments div").last.present?
         }

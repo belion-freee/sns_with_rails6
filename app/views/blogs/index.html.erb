@@ -1,17 +1,17 @@
-<h1>Blogs</h1>
+<h1><%= t(".title") %></h1>
 
 <%= search_form_for @q do |f| %>
   <div class="my-2">
-    <%= select_tag :tag_list, options_for_select(Blog::TAGS), multiple: true, class: "enable-select2" %>
+    <%= select_tag :tag_list, options_for_select(tags_for_options), multiple: true, class: "enable-select2" %>
   </div>
   <div class="my-2">
-    <%= f.search_field :title_cont, placeholder: "Search by title", class: "py-1" %>
+    <%= f.search_field :title_cont, placeholder: tl(:title), class: "py-1" %>
   </div>
   <div class="my-2">
-    <%= text_field_tag :body, "", placeholder: "Search by  body", class: "py-1" %>
+    <%= text_field_tag :body, "", placeholder: tl(:body), class: "py-1" %>
   </div>
 
-  <%= submit_tag "Search", class: "btn btn-outline-info btn-sm" %>
+  <%= submit_tag tl(:search), class: "btn btn-outline-info btn-sm" %>
 <% end %>
 
 <%= paginate @blogs %>
@@ -25,7 +25,7 @@
     </small>
     <p class="mt-2">
       <% blog.tag_list.each do |tag| %>
-        <span class="badge badge-primary mr-1 p-2"><%= tag %></span>
+        <span class="badge badge-primary mr-1 p-2"><%= tags(tag) %></span>
       <% end %>
     </p>
   </div>
@@ -33,4 +33,4 @@
 
 <%= paginate @blogs %>
 
-<%= link_to 'New Blog', new_blog_path, class: "btn btn-outline-primary my-2" %>
+<%= link_to tl(:new), new_blog_path, class: "btn btn-outline-primary my-2" %>

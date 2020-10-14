@@ -6,7 +6,7 @@ RSpec.describe "Homes", type: :request do
       it "render to login form" do
         get root_path
         expect(response.status).to eq(200)
-        expect(response.body).to include("Please sign up at first!")
+        expect(response.body).to include("まずはアカウントを作成してください")
       end
     end
 
@@ -15,7 +15,7 @@ RSpec.describe "Homes", type: :request do
         log_in
         get root_path
         expect(response.status).to eq(200)
-        expect(response.body).to include("Go to blogs")
+        expect(response.body).to include("ブログ一覧")
       end
     end
   end

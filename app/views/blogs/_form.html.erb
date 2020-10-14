@@ -2,13 +2,13 @@
 
 <%= form_with(model: blog, local: true) do |form| %>
   <div class="field">
-    <%= form.label :title %><br />
+    <%= form.label tl(:title) %><br />
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
     <%= form.label :tag_list %><br />
-    <%= form.select :tag_list, options_for_select(Blog::TAGS, blog.tag_list), {}, multiple: true, class: "enable-select2" %>
+    <%= form.select :tag_list, options_for_select(tags_for_options, blog.tag_list), {}, multiple: true, class: "enable-select2" %>
   </div>
 
   <div class="field">
@@ -29,6 +29,6 @@
   </div>
 
   <div class="actions my-2">
-    <%= form.submit class: "btn btn-outline-primary my-2" %>
+    <%= form.submit tl(:submit), class: "btn btn-outline-primary my-2" %>
   </div>
 <% end %>
