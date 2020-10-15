@@ -24,14 +24,31 @@ module ApplicationHelper
   end
 
   def follow_button(user)
-    label, key = current_user.following?(user) ? ["Unfollow", "secondary"] : ["Follow", "primary"]
+    label, key = current_user.following?(user) ? [tl(:unfollow), "secondary"] : [tl(:follow), "primary"]
     link_to(label, user_follow_path(@user), method: :post, remote: true, class: "btn btn-#{key} btn-sm")
   end
 
   def favorites_group_by_tag(blogs)
     blogs.map(&:tag_list).flatten.uniq.map {|tag|
       ids = blogs.tagged_with(tag).ids
-      [tag, ids]
+      [tags(tag), ids]
     }.sort_by {|r| r.last.size }.reverse
+  end
+
+  def tl(key, model_name = controller.controller_name.singularize)
+    actions = t("views.actions").keys
+    if key.to_sym.in?(actions)
+      t("views.actions.#{key}")
+    else
+      t("activerecord.attributes.#{model_name}.#{key}")
+    end
+  end
+
+  def tags_for_options
+    t("views.tags").invert
+  end
+
+  def tags(key = nil)
+    t("views.tags.#{key}")
   end
 end

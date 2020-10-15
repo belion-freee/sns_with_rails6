@@ -128,9 +128,9 @@ RSpec.describe "Blogs", type: :request do
         blog = Blog.find_by(title: "Create Blog#{timestamp}")
         expect(response).to redirect_to(blog_path(blog))
         follow_redirect!
-        expect(response.body).to include("Blog was successfully created.")
+        expect(response.body).to include("正常に作成されました")
         expect(response.body).to include("Create Blog#{timestamp}")
-        expect(response.body).to include("entertainment", "fashion")
+        expect(response.body).to include("エンターテイメント", "ファッション")
       end
     end
 
@@ -140,7 +140,7 @@ RSpec.describe "Blogs", type: :request do
           post blogs_path, params: { blog: attributes_for(:blog, title: "") }
         }.to change { Blog.count }.by(0)
         expect(response.status).to eq(200)
-        expect(response.body).to include(CGI.escapeHTML("Title can't be blank"))
+        expect(response.body).to include("タイトルを入力してください")
       end
     end
 
@@ -169,7 +169,7 @@ RSpec.describe "Blogs", type: :request do
             post blogs_path(format: :json), params: { blog: attributes_for(:blog, title: "") }
           }.to change { Blog.count }.by(0)
           expect(response.status).to eq(422)
-          expect(json_response["title"]).to include("can't be blank")
+          expect(json_response["title"]).to include("を入力してください")
         end
       end
     end
@@ -182,9 +182,9 @@ RSpec.describe "Blogs", type: :request do
         put blog_path(blog), params: { blog: { title: "Updated #{timestamp}", tag_list: ["technology"]} }
         expect(response).to redirect_to(blog_path(blog))
         follow_redirect!
-        expect(response.body).to include("Blog was successfully updated.")
+        expect(response.body).to include("正常に更新されました")
         expect(response.body).to include("Updated #{timestamp}")
-        expect(response.body).to include("technology")
+        expect(response.body).to include("技術")
       end
     end
 
@@ -192,7 +192,7 @@ RSpec.describe "Blogs", type: :request do
       it "render to edit page" do
         put blog_path(blog), params: { blog: { title: ""} }
         expect(response.status).to eq(200)
-        expect(response.body).to include(CGI.escapeHTML("Title can't be blank"))
+        expect(response.body).to include("タイトルを入力してください")
       end
     end
 
@@ -219,7 +219,7 @@ RSpec.describe "Blogs", type: :request do
         it "return error messages" do
           put blog_path(blog, format: :json), params: { blog: { title: ""} }
           expect(response.status).to eq(422)
-          expect(json_response["title"]).to include("can't be blank")
+          expect(json_response["title"]).to include("を入力してください")
         end
       end
     end
@@ -232,7 +232,7 @@ RSpec.describe "Blogs", type: :request do
         delete blog_path(blog)
         expect(response).to redirect_to(blogs_path)
         follow_redirect!
-        expect(response.body).to include("Blog was successfully destroyed")
+        expect(response.body).to include("正常に削除されました")
       end
     end
 
@@ -249,7 +249,7 @@ RSpec.describe "Blogs", type: :request do
         delete blog_path(other_blog)
         expect(response).to redirect_to(blogs_path)
         follow_redirect!
-        expect(response.body).not_to include("Blog was successfully destroyed")
+        expect(response.body).not_to include("正常に削除されました")
       end
     end
   end

@@ -1,0 +1,45 @@
+ja:
+  # viewファイル毎に定義する
+  blogs:
+    index:
+      title: ブログ一覧
+    show:
+      title: ブログ
+    edit:
+      title: ブログ編集
+    new:
+      title: ブログ作成
+  comments:
+    index:
+      title: コメント一覧
+    new:
+      title:  コメントを書く
+      submit: コメントする
+  home:
+    index:
+      main: "ようこそ！"
+      sub:  "このブログアプリは Rails 6.0 で作られています"
+      sign_up: "まずはアカウントを作成してください"
+      sign_in: "既にアカウントがある場合はこちらからログインしてください"
+
+  views:
+    actions:
+      new:      作成
+      edit:     編集
+      delete:   削除
+      submit:   送信
+      follow:   フォロー
+      unfollow: フォロー解除
+      search:   検索
+      login:    ログイン
+      logout:   ログアウト
+      back:     戻る
+    tags:
+      entertainment: エンターテイメント
+      travel:        旅行
+      fashion:       ファッション
+      food:          グルメ
+      lifestyle:     生活
+      sports:        スポーツ
+      business:      ビジネス
+      technology:    技術
