@@ -1,5 +1,6 @@
 #!/bin/bash
 
+d=$(which docker) # docker-compose command with full path
 dc=$(which docker-compose) # docker-compose command with full path
 
 if [[ -x "$dc" ]]; then
@@ -201,9 +202,17 @@ run_solargraph() {
     invoke_run solargraph $*
 }
 
-rails_server() {
+start_rails-server() {
     rm_pids
-    # $dc run $rm ${renv}--service-ports $app rails s -p 3000 -b 0.0.0.0
+    $dc run $rm --name run-web-server ${renv}--service-ports $app rails s -p 3000 -b 0.0.0.0
+}
+
+start_webpack-dev-server() {
+    $d exec -d run-web-server bin/webpack-dev-server
+}
+
+start_servers() {
+    rm_pids
     $dc run $rm --service-ports $app bundle exec foreman start -f Procfile.dev
 }
 
@@ -380,7 +389,13 @@ case "$cmd" in
         invoke_run $*
         ;;
     server)
-        rails_server $*
+        start_rails-server $*
+        ;;
+    dev-server)
+        start_webpack-dev-server $*
+        ;;
+    servers)
+        start_servers $*
         ;;
     rails)
         rails_cmd $*
