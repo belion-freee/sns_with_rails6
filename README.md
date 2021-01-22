@@ -58,7 +58,7 @@ Dockerを使用しているので、ローカルにpullして開発環境を立�
   - Rspecを使って単体テストと統合テストを実装しています。
 - [CircleCIによる自動テスト](https://github.com/belion-freee/sns_with_rails6/pull/12)
   - 自動テストの設定とREADMEへのバッジ追加を実装してます。
-  
+
 #### 参考になりそうなプルリクエスト
 以下は見なくてもいいけど参考になりそうなプルリクエストです。
 
@@ -78,7 +78,7 @@ $ ./qs init --webpack
 
 `http://localhost:3000`にアクセスするとアプリが利用可能です。
 
-以降の開発では `./qs server` でアプリを起動すると、webpack-dev-serverによるホットリロードが実行されたり、[byebug](https://github.com/deivid-rodriguez/byebug)が利用できるので、開発効率が上がりオススメです。
+以降の開発では `./qs servers` でアプリを起動すると、webpack-dev-serverによるホットリロードが実行されたり、[byebug](https://github.com/deivid-rodriguez/byebug)が利用できるので、開発効率が上がりオススメです。
 
 
 seedで初期アカウントを登録してるので、すぐに動作確認できます。
@@ -94,3 +94,11 @@ email: "foo@sample.com"
 password: "Password"
 ```
 
+#### 対話型のデバッグコンソールが表示されない
+foremanを使用してwebpack-dev-serverによるホットリロードを同時起動すると、コンソールに[対話型のデバッグコンソールが表示されない問題](https://github.com/ddollar/foreman/issues/58)が発生する。デバッグコンソールへの入力は可能ではあるが、入力した値が表示されない(入力後にenterを押すと実行結果と一緒に表示される)ので開発し辛い。
+
+dockerを使ってる場合のスマートな解決方法が見つからなかったので、以下のやり方でホスト側で二つのプロセスを起動することで解決できます。なお、byebugでのデバッグが不要な場合は`./qs servers`でも良い。
+
+- `./qs server` でアプリを起動
+- ターミナルで別ダブを開く
+- 開いたタブで`./qs dev-server`を実行して、アプリを起動したタブに戻って開発する
